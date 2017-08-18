@@ -1,0 +1,18 @@
+[ 2017-08-16T01:14:23+08:00 ] 192.168.2.100 /index.php?m=member&c=index&a=register&siteid=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000061s ]
+ERR: 无法加载模块:Member
+
+[ 2017-08-16T01:14:24+08:00 ] 192.168.2.100 /index.php?m=wap&a=index&siteid=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000164s ]
+ERR: 无法加载模块:Wap
+
+[ 2017-08-16T01:16:40+08:00 ] 192.168.2.100 /index.php?g=Wap&m=Dining&a=ShowDetail&id=2%20and%20updatexml(1,concat(0x7e,md5(1),0x7e),0)%23
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000149s ]
+ERR: 无法加载模块:Dining
+
