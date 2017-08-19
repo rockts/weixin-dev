@@ -19,3 +19,12 @@ ERR: syntax error, unexpected '"'
 [ 2017-08-20T02:34:40+08:00 ] 192.168.2.100 /imooc.php/Home/index
 ERR: syntax error, unexpected '"'
 
+[ 2017-08-20T04:13:07+08:00 ] 192.168.2.100 /imooc.php/Home/index/definedItem
+ERR: syntax error, unexpected '}'
+
+[ 2017-08-20T04:13:08+08:00 ] 192.168.2.100 /imooc.php/Home/index/definedItem
+ERR: syntax error, unexpected '}'
+
+[ 2017-08-20T04:13:56+08:00 ] 192.168.2.100 /imooc.php/Home/index/definedItem
+ERR: syntax error, unexpected '}'
+

@@ -81,7 +81,7 @@ class IndexController extends Controller {
       $ch = curl_init();
       //2.设置curl的参数
       curl_setopt($ch, CURLOPT_URL, $url);
-      curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
       if($type == 'post' ){
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
@@ -123,10 +123,9 @@ class IndexController extends Controller {
     //  }
 
      function getWxServerIp(){
-       $accessToken = "DaSKgL9TF3Byq0uthDr3GafHxc94KAdl-Mkb2fFH09g71hcdzU-ieW8JJzz_jdDz_mQM9jACvO6mAv0fXho3ZK4ChCeX-AvbhjilBq67p_IHPVaAAASAG";
+       $accessToken =  $this->getWxAccessToken();
        $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$accessToken;
        $ch = curl_init();
-       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
        curl_setopt($ch, CURLOPT_URL, $url);
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
        $res = curl_exec($ch);
@@ -152,12 +151,13 @@ class IndexController extends Controller {
          $appsecret = '21f2683c879a555c1503e822f47a2a9d';
          $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$appid."&secret=".$appsecret;
          $res = $this->http_curl($url, 'get', 'json');
-         $access_token = $res['access_token'];
+         $access_token = ['access_token'];
          //将重新获取到的access_token存到session
          $_SESSION['access_token'] = $access_token;
          $_SESSION['expire_time'] = time()+7000;
 
          return $access_token;
+         echo $res;
        }
      }
 
@@ -202,6 +202,26 @@ class IndexController extends Controller {
        echo $postJson = urldecode( json_encode( $postArr ) );
        $res = $this->http_curl($url, 'post', 'json', $postJson);
        echo "<hr />";
+       var_dump($res);
+     }
+
+     function sendMsgAll(){
+       //1.获取全局access_token
+       echo $access_token = $this->getWxAccessToken();
+       echo "<hr />";
+       $url = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=".$access_token;
+       //2.组装群发接口数据 arrry
+       $array = array(
+         'touser'=>'oy_uXuCMxETPxEpaClgBN8slauYw', //微信用户的openid
+         'text'=>array('content'=> 'imooc is very happy'), //文本内容
+         'msgtype'=>'text'//消息类型
+       );
+       //3.将array->json
+       $postJson = json_encode( $array );
+       var_dump($postJson);
+       echo "<hr />";
+       //4.调用curl
+       $res = $this->http_curl($url, 'post', 'json', $postJson);
        var_dump($res);
      }
 }//class end
