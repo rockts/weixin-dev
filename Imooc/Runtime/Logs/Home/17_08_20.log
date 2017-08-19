@@ -10,3 +10,12 @@ ERR: syntax error, unexpected 'json_decode' (T_STRING)
 [ 2017-08-20T01:43:34+08:00 ] 192.168.2.100 /imooc.php/Home/index
 ERR: syntax error, unexpected 'json_decode' (T_STRING)
 
+[ 2017-08-20T02:34:23+08:00 ] 192.168.2.100 /imooc.php/Home/index
+ERR: syntax error, unexpected '"'
+
+[ 2017-08-20T02:34:39+08:00 ] 192.168.2.100 /imooc.php/Home/index
+ERR: syntax error, unexpected '"'
+
+[ 2017-08-20T02:34:40+08:00 ] 192.168.2.100 /imooc.php/Home/index
+ERR: syntax error, unexpected '"'
+
