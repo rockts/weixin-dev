@@ -55,20 +55,45 @@ class IndexController extends Controller {
       }//if end
      }//resonseMsg end
 
-     function http_curl(){
-       //获取imooc
-       //1.初始化curl
-       $ch = curl_init();
-       $url = 'http://www.baidu.com';
-       //2.设置curl的参数
-       curl_setopt($ch, CURLOPT_URL, $url);
-       curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-       //3.采集
-       $output = curl_exec($ch);
-       //4.关闭
-       curl_close($ch);
-       var_dump($output);
-     }
+    //  function http_curl(){
+    //    //获取imooc
+    //    //1.初始化curl
+    //    $ch = curl_init();
+    //    $url = 'http://www.baidu.com';
+    //    //2.设置curl的参数
+    //    curl_setopt($ch, CURLOPT_URL, $url);
+    //    curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+    //    //3.采集
+    //    $output = curl_exec($ch);
+    //    //4.关闭
+    //    curl_close($ch);
+    //    var_dump($output);
+    //  }
+
+    /**
+     * $url 接口url string
+     * $type 请求类型 string
+     * $res 返回数据类型 string
+     * $arr post请求参数 string
+     */
+    function http_curl($url, $type='get', $res='json'){
+      //1.初始化curl
+      $ch = curl_init();
+      //2.设置curl的参数
+      curl_setopt($ch, CURLOPT_URL, $url);
+      curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+      if($type == 'post' ){
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $arr);
+      }
+      //3.采集
+      $output = curl_exec($ch);
+      //4.关闭
+      curl_close($ch);
+      if($res=='json'){
+        return json_decode($output, true);
+      }
+    }
 
      function getWxAccessToken(){
        //1.请求url地址
@@ -93,7 +118,7 @@ class IndexController extends Controller {
 
      function getWxServerIp(){
        $accessToken = "_X25puqe-u3e-ikx9AeMjnZ5MlSAEetIxrR10sCodIJkQh-5zLPDH2a4kEQsvGGl6G4_lDdPd6KSCSoHUZ-3lDav1R18Wyy8SguUBmcUaPw96NB6lBsJ4AxlVAYEMjE7EBIaABAIFM";
-       $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=$accessToken";
+       $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".$accessToken;
        $ch = curl_init();
        curl_setopt($ch, CURLOPT_URL, $url);
        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -111,6 +136,15 @@ class IndexController extends Controller {
      public function definedItem(){
        //创建微信菜单
        //目前微信接口的调用方式都是通过curl post/get
-
+       $access_token = "";
+       $url = " https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$access_token;
+       $postArr = array(
+         array(), //第一个一级菜单
+         array(), //第二个一级菜单
+         array(), //第三个一级菜单
+       );
+       $postJson = json_encode( $postArr );
+       $res = $this->http_curl($url, 'post', 'json', $postJson);
+       var_dump($res);
      }
 }//class end
