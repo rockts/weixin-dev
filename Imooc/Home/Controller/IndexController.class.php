@@ -59,7 +59,7 @@ class IndexController extends Controller {
        //1.请求url地址
        $appid = 'wx29ce29e1eb671505';
        $appsecret = '21f2683c879a555c1503e822f47a2a9d';
-       $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx29ce29e1eb671505&secret=21f2683c879a555c1503e822f47a2a9d';
+       $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
        //2.初始化
        $ch = curl_init();
        //3.设置参数
@@ -75,4 +75,26 @@ class IndexController extends Controller {
        $arr = json_decode($res, true);
        var_dump( $arr );
      }
-}
+
+     function getWxServerIp(){
+       $accessToken = "_X25puqe-u3e-ikx9AeMjnZ5MlSAEetIxrR10sCodIJkQh-5zLPDH2a4kEQsvGGl6G4_lDdPd6KSCSoHUZ-3lDav1R18Wyy8SguUBmcUaPw96NB6lBsJ4AxlVAYEMjE7EBIaABAIFM";
+       $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=$accessToken";
+       $ch = curl_init();
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+       $res = curl_exec($ch);
+       curl_close($ch);
+       if(curl_error($ch)){
+         var_dump(curl_error($ch));
+       }
+       $arr = json_decode($res, true);
+       echo "<pre>";
+       var_dump( $arr );
+       echo "</pre>";
+     }
+
+     public function definedItem(){
+       //创建微信菜单
+       //目前微信接口的调用方式都是通过curl post/get
+     }
+}//class end
