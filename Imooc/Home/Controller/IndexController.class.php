@@ -54,4 +54,25 @@ class IndexController extends Controller {
         }
       }
      }
+
+     function getWxAccessToken() {
+       //1.请求url地址
+       $appid = 'wx29ce29e1eb671505';
+       $appsecret = '21f2683c879a555c1503e822f47a2a9d';
+       $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx29ce29e1eb671505&secret=21f2683c879a555c1503e822f47a2a9d';
+       //2.初始化
+       $ch = curl_init();
+       //3.设置参数
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+       //4.调用接口
+       $res = curl_exec($ch);
+       //5.关闭url
+       curl_close( $ch );
+       if( curl_error($ch) ){
+         var_dump( curl_error($ch) );
+       }
+       $arr = json_decode($res, true);
+       var_dump( $arr );
+     }
 }
