@@ -52,10 +52,25 @@ class IndexController extends Controller {
           echo $info;
 
         }
-      }
+      }//if end
+     }//resonseMsg end
+
+     function http_curl(){
+       //获取imooc
+       //1.初始化curl
+       $ch = curl_init();
+       $url = 'http://www.baidu.com';
+       //2.设置curl的参数
+       curl_setopt($ch, CURLOPT_URL, $url);
+       curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+       //3.采集
+       $output = curl_exec($ch);
+       //4.关闭
+       curl_close($ch);
+       var_dump($output);
      }
 
-     function getWxAccessToken() {
+     function getWxAccessToken(){
        //1.请求url地址
        $appid = 'wx29ce29e1eb671505';
        $appsecret = '21f2683c879a555c1503e822f47a2a9d';
@@ -96,5 +111,6 @@ class IndexController extends Controller {
      public function definedItem(){
        //创建微信菜单
        //目前微信接口的调用方式都是通过curl post/get
+
      }
 }//class end
